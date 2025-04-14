@@ -9,8 +9,10 @@ var selectedText = getSelectedText();
 
 if (!selectedText) {
   alert("Please highlight some text before running Bias Buster AI.");
-} else {
+} 
+else {
   console.log("🧠 Selected text:", selectedText.slice(0, 300));
+
 
   var fakeScore = selectedText.length > 100 
     ? Math.floor(Math.random() * 100) 
@@ -19,11 +21,22 @@ if (!selectedText) {
     ? "This section seems moderately biased."
     : "Not enough content to analyze bias.";
 
-  chrome.storage.local.set({
-    aiScore: fakeScore,
-    aiSummary: fakeSummary
-  }, function() {
-    console.log("✅ Stored AI score and summary from selection.");
-  });
+
+    chrome.runtime.sendMessage({
+      type: "analyzeTextWithAI", payload: selectedText
+    },
+    function (response) {
+      if (chrome.runtime.lastError) {
+        console.error("Error sending message:", chrome.runtime.lastError.message);
+      } else {
+        console.log("✅ AI analysis response:", response);
+        chrome.storage.local.set({
+          aiScore: response.score,
+          aiSummary: response.summary
+        },() => {
+          chrome.runtime.sendMessage({ action: "updatePopup" });
+        });
+      }
+    });
 }
 

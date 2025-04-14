@@ -22,8 +22,7 @@
         "default_popup": "popup/popup.html"
     },
     "host_permissions": [
-        "http://*/*",
-        "https://*/*"
+        "<all_urls>"
     ],
     "background": {
         "service_worker": "background.js"
