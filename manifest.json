@@ -1,8 +1,9 @@
 {
-    "manifest_version": 3,
     "name": "Bias Buster",
     "version": "1.0.0",
+    "manifest_version": 3,
     "description":"Highlights emotionally loaded or biased language in news articles, blog posts, and editorials. Offers alternative phrasing and optional source insight.",
+    "permissions": ["activeTab", "scripting"],
     "icons": {
         "16": "images/icon-16.png",
         "32": "images/icon-32.png",
@@ -16,8 +17,19 @@
             "48": "images/icon-48.png",
             "128": "images/icon-128.png"
         },
+        "default_title": "Click Me",
         "default_popup": "popup/popup.html"
     },
+    "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+    ],
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+    ],
     "background": {
         "service_worker": "background.js"
     }

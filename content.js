@@ -1,3 +1,5 @@
+console.log("Bias Buster content script running!");
+
 fetch(chrome.runtime.getURL("data/bias_words.json"))
   .then(res => res.json())
   .then(biasWords => {
