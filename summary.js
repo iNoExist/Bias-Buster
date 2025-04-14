@@ -23,7 +23,7 @@ else {
 
 
     chrome.runtime.sendMessage({
-      type: "analyzeTextWithAI", payload: selectedText
+      type: "analyzeText", payload: selectedText
     },
     function (response) {
       if (chrome.runtime.lastError) {
