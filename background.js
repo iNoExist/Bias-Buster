@@ -41,5 +41,26 @@ chrome.action.onClicked.addListener((tab) => {
     });
   });*/
   
+  chrome.action.onClicked.addListener((tab) => {
+    console.log("🔘 Extension icon clicked!");
+  
+    if (!tab || !tab.id) {
+      console.error("❌ No active tab or tab ID found.");
+      return;
+    }
+  
+    console.log(`📄 Attempting to inject content.js into tab ID: ${tab.id}, URL: ${tab.url}`);
+  
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      files: ["content.js"]
+    })
+    .then(() => {
+      console.log("✅ Successfully injected content.js!");
+    })
+    .catch((error) => {
+      console.error("❌ Failed to inject content.js:", error);
+    });
+  });
   
   
