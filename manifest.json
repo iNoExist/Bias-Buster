@@ -2,7 +2,7 @@
     "name": "Bias Buster",
     "version": "1.0.0",
     "manifest_version": 3,
-    "description":"Highlights emotionally loaded or biased language in news articles, blog posts, and editorials. Offers alternative phrasing and optional source insight.",
+    "description":"Highlights emotionally loaded or biased language in texts. Offers alternative phrasing and optional source insight.",
     "permissions": ["activeTab","scripting","storage"],
     "icons": {
         "16": "images/icon-16.png",
