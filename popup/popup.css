@@ -25,3 +25,13 @@ body {
   font-size: 14px;
 }
 
+#ai-btn {
+  margin: 10px auto;
+  display: block;
+  width: 200px;
+  font-size: 14px;
+}
+
+p{
+  font-size: 12px;
+}
