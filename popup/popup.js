@@ -11,13 +11,6 @@ document.getElementById("scan").addEventListener("click", () => {
         chrome.scripting.executeScript({
           target: { tabId: tab.id },
           files: ["content.js"]
-        },
-        (result) => {
-            if (chrome.runtime.lastError) {
-              console.error("Error executing script: ", chrome.runtime.lastError);
-            } else {
-              console.log("Script executed successfully.");
-            }
         });
       }
     });
