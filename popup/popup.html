@@ -19,8 +19,20 @@
       </div>
     </div>
     <div class="window-body">
-      <p id="status">Click the button to scan for biased language.</p>
-      <button id="scan" class="btn">Run Bias Buster</button>
+      <div class="tabs">
+        <button class="tab-button" id="scan-tab">Bias Scanner</button>
+        <button class="tab-button" id="ai-tab">AI Bias Score</button>
+      </div>
+
+      <div class="tab-content" id="scan-tab-content">
+        <p id="status">Click the button to scan and replace biased language.</p>
+        <button id="scan" class="btn">Run Bias Buster</button>
+      </div>
+
+      <div class="tab-content" id="ai-tab-content" style="display: none;">
+        <h3>AI Bias Score</h3>
+        <p id="ai-summary">Loading...<br>Summary will be displayed here.</p>
+      </div>
     </div>
   </div>
 </body>
