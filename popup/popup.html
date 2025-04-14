@@ -1,11 +1,28 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bias Buster</title>
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/98.css/dist/98.css">
   <link rel="stylesheet" href="popup.css">
+
+  </style>
 </head>
 <body>
-  <h1>Bias Buster</h1>
-  <p id="status">Click the button to scan for biased language.</p>
-  <button id="scan">Run Bias Buster</button>
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">Bias Buster</div>
+      <div class="title-bar-controls">
+        <button aria-label="Close" id="close-btn"></button>
+      </div>
+    </div>
+    <div class="window-body">
+      <p id="status">Click the button to scan for biased language.</p>
+      <button id="scan" class="btn">Run Bias Buster</button>
+    </div>
+  </div>
 </body>
 <script src="popup.js"></script>
 </html>
