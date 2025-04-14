@@ -1,0 +1,6 @@
+.bias-highlight {
+    background-color: rgba(255, 0, 0, 0.2);
+    border-bottom: 1px dotted red;
+    cursor: help;
+  }
+  
