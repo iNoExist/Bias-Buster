@@ -20,12 +20,6 @@
         "default_title": "Click Me",
         "default_popup": "popup/popup.html"
     },
-    "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
-    }
-    ],
     "host_permissions": [
         "http://*/*",
         "https://*/*"
