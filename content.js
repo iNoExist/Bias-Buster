@@ -1,19 +1,21 @@
 console.log("🚀 Bias Buster content script running!");
 
-const biasWordsURL = chrome.runtime.getURL("data/bias_words.json");
-console.log(`📂 Fetching bias words from: ${biasWordsURL}`);
+// Inject highlight.css manually
+const cssLink = document.createElement("link");
+cssLink.rel = "stylesheet";
+cssLink.type = "text/css";
+cssLink.href = chrome.runtime.getURL("styles/highlight.css");
+document.head.appendChild(cssLink);
+console.log("🎨 highlight.css manually injected!");
 
-fetch(biasWordsURL)
+// Fetch the JSON data
+fetch(chrome.runtime.getURL("data/bias_words.json"))
   .then(res => {
-    if (!res.ok) {
-      console.error(`❌ HTTP error while fetching bias_words.json. Status: ${res.status}`);
-      throw new Error(`HTTP error! Status: ${res.status}`);
-    }
-    console.log("✅ bias_words.json successfully fetched.");
+    if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
     return res.json();
   })
   .then(biasWords => {
-    console.log("📦 Parsed biasWords JSON:", biasWords);
+    console.log("📦 Bias words loaded:", biasWords);
 
     const walk = (node) => {
       if (node.nodeType === 3) {
@@ -22,13 +24,12 @@ fetch(biasWordsURL)
           new RegExp(`\\b(${Object.keys(biasWords).join("|")})\\b`, "gi"),
           (match) => {
             const replacement = biasWords[match.toLowerCase()];
-            console.log(`🔍 Found biased word: "${match}" → Suggestion: "${replacement}"`);
-            return `<span class="bias-highlight" title="Try: ${replacement}">${match}</span>`;
+            console.log(`🔄 Replacing "${match}" → "${replacement}"`);
+            return `<span class="bias-highlight" title="Originally: ${match}">${replacement}</span>`;
           }
         );
 
         if (original !== replaced) {
-          console.log(`📝 Replacing text in node: "${original}"`);
           const span = document.createElement("span");
           span.innerHTML = replaced;
           node.parentNode.replaceChild(span, node);
@@ -40,11 +41,9 @@ fetch(biasWordsURL)
       }
     };
 
-    console.log("🔁 Starting DOM traversal...");
     walk(document.body);
-    console.log("✅ Finished scanning and highlighting biased language.");
-
+    console.log("✅ DOM processed. Replacements complete.");
   })
   .catch(err => {
-    console.error("❌ Error loading or processing bias_words.json:", err);
+    console.error("❌ Failed to load or process bias_words.json:", err);
   });

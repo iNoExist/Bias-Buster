@@ -28,9 +28,10 @@
     "background": {
         "service_worker": "background.js"
     },
+    
       "web_accessible_resources": [
         {
-          "resources": ["data/bias_words.json"],
+          "resources": ["styles/highlight.css","data/bias_words.json"],
           "matches": ["<all_urls>"]
         }
       ]
